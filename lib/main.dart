@@ -33,7 +33,16 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
-          actions: [IconButton(icon: Icon(Icons.add), onPressed: () {})],
+          actions: [
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return Text("Screen 2");
+                }));
+              },
+            )
+          ],
         ),
         body: Container());
   }
