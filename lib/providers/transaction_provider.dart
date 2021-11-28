@@ -20,6 +20,8 @@ class TransactionProvider with ChangeNotifier {
   }
 
   void addTransaction(Transaction statement) {
-    transactions.add(statement);
+    transactions.insert(0,statement);
+    //แจ้งเตือน consumer
+    notifyListeners();
   }
 }

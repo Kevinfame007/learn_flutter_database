@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:learn_flutter_database/models/Transaction.dart';
+import 'package:learn_flutter_database/providers/transaction_provider.dart';
+import 'package:provider/provider.dart';
 
 class FormScreen extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
 
   //Controller
-  final titleController = TextEditingController();//รับค่าชื่อรายการ
-  final amountController = TextEditingController();//รับค่าจำนวนเงิน
+  final titleController = TextEditingController(); //รับค่าชื่อรายการ
+  final amountController = TextEditingController(); //รับค่าจำนวนเงิน
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +28,7 @@ class FormScreen extends StatelessWidget {
                 controller: titleController,
                 validator: (String? str) {
                   //ชื่อรายาการเป็นค่าว่าง
-                  if(str!.isEmpty) {
+                  if (str!.isEmpty) {
                     return "กรุณาป้อนชื่อรายการ";
                   }
                   return null;
@@ -37,10 +40,10 @@ class FormScreen extends StatelessWidget {
                 controller: amountController,
                 validator: (String? str) {
                   //ชื่อรายาการเป็นค่าว่าง
-                  if(str!.isEmpty) {
+                  if (str!.isEmpty) {
                     return "กรุณาป้อนจำนวนเงิน";
                   }
-                  if (double.parse(str)<=0) {
+                  if (double.parse(str) <= 0) {
                     return "กรุณาป้อนตัวเลขมากกว่า 0";
                   }
                   return null;
@@ -51,12 +54,21 @@ class FormScreen extends StatelessWidget {
                 color: Colors.purple,
                 textColor: Colors.white,
                 onPressed: () {
-                  if(formKey.currentState!.validate()) {
+                  if (formKey.currentState!.validate()) {
                     var title = titleController.text;
                     var amount = amountController.text;
 
-                    print(title);
-                    print(amount);
+                    //เตรียมข้อมูล
+                    Transaction statement = Transaction(
+                      title: title,
+                      amount: double.parse(amount),
+                      date: DateTime.now(),
+                    ); //object
+
+                    //เรียก Provider
+                    var provider = Provider.of<TransactionProvider>(context,
+                        listen: false);
+                    provider.addTransaction(statement);
                     Navigator.pop(context);
                   }
                 },
