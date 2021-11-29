@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:learn_flutter_database/models/Transaction.dart';
+import 'package:learn_flutter_database/models/Transactions.dart';
 import 'package:learn_flutter_database/providers/transaction_provider.dart';
 import 'package:learn_flutter_database/screens/form_screen.dart';
 import 'package:provider/provider.dart';
-import 'models/Transaction.dart';
+import 'models/Transactions.dart';
 
 void main() {
   runApp(const MyApp());
@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
               return ListView.builder(
                 itemCount: count,
                 itemBuilder: (context, int index) {
-                  Transaction data = provider.transactions[index];
+                  Transactions data = provider.transactions[index];
                   return Card(
                     margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
                     elevation: 5,
@@ -83,7 +83,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       title: Text(data.title),
-                      subtitle: Text(DateFormat("dd/mm/yyyy").format(data.date)),
+                      subtitle: Text(
+                          DateFormat("dd/MM/yyyy HH:mm").format(data.date)),
                     ),
                   );
                 },
