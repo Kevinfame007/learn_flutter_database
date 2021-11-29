@@ -19,6 +19,8 @@ class TransactionProvider with ChangeNotifier {
     var db = TransactionDB(dbName: "transaction.db");
     //บันทึกข้อมูล
     await db.InsertData(statement);
+    //ดึงข้อมูลมาแสดงผล
+    await db.loadAllData();
     transactions.insert(0, statement);
     //แจ้งเตือน consumer
     notifyListeners();

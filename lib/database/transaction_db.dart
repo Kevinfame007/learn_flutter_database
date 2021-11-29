@@ -42,4 +42,13 @@ class TransactionDB {
     db.close();
     return keyID;
   }
+
+  //ดึงข้อมูล
+  Future<bool> loadAllData() async {
+    var db = await this.openDatebase();
+    var store = intMapStoreFactory.store("expense");
+    var snapshot = await store.find(db);
+    print(snapshot);
+    return true;
+  }
 }
