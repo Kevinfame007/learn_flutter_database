@@ -1,21 +1,22 @@
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/foundation.dart';
-import 'package:learn_flutter_database/models/Transaction.dart';
-import 'package:provider/provider.dart';
-
+import 'package:learn_flutter_database/database/transaction_db.dart';
+import 'package:learn_flutter_database/models/Transactions.dart';
 
 class TransactionProvider with ChangeNotifier {
   //ตัวอย่างข้อมูล
-  List<Transaction> transactions = [];
+  List<Transactions> transactions = [];
 
   //ดึงข้อมูล
-  List<Transaction> getTransaction () {
+  List<Transactions> getTransaction() {
     return transactions;
   }
 
-  void addTransaction(Transaction statement) {
-    transactions.insert(0,statement);
+  void addTransaction(Transactions statement) async {
+    var db = await TransactionDB(dbName: "transaction.db").openDatebase();
+    print(db);
+    transactions.insert(0, statement);
     //แจ้งเตือน consumer
     notifyListeners();
   }
