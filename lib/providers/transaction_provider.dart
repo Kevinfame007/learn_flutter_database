@@ -17,6 +17,7 @@ class TransactionProvider with ChangeNotifier {
     var db = TransactionDB(dbName: "transaction.db");
     //ดึงข้อมูลมาแสดงผล
     transactions = (await db.loadAllData());
+
     notifyListeners();
   }
 

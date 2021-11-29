@@ -44,7 +44,7 @@ class TransactionDB {
   }
 
   //ดึงข้อมูล
-  Future<List<Transactions>> loadAllData() async {
+  Future<List<Transactions>> loadAllData () async {
     var db = await this.openDatebase();
     var store = intMapStoreFactory.store("expense");
     var snapshot = await store.find(db);
