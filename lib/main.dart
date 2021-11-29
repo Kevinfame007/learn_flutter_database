@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:learn_flutter_database/models/Transaction.dart';
 import 'package:learn_flutter_database/providers/transaction_provider.dart';
 import 'package:learn_flutter_database/screens/form_screen.dart';
@@ -57,13 +58,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         body: Consumer(
-          builder: (context, TransactionProvider provider, child) {
+          builder: (context, TransactionProvider provider, Widget? child) {
             var count = provider.transactions.length; //นับจำนวนข้อมูล
-            if (count < 0) {
+            if (count <= 0) {
               return Center(
                 child: Text(
                   "ไม่พบข้อมูล",
-                  style: TextStyle(fontSize: 40),
+                  style: TextStyle(fontSize: 35),
                 ),
               );
             } else {
@@ -82,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       title: Text(data.title),
-                      subtitle: Text(data.date.toString()),
+                      subtitle: Text(DateFormat("dd/mm/yyyy").format(data.date)),
                     ),
                   );
                 },
