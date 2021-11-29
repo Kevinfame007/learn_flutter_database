@@ -13,6 +13,13 @@ class TransactionProvider with ChangeNotifier {
     return transactions;
   }
 
+  void initData() async {
+    var db = TransactionDB(dbName: "transaction.db");
+    //ดึงข้อมูลมาแสดงผล
+    transactions = await db.loadAllData();
+    notifyListeners();
+  }
+
   void addTransaction(Transactions statement) async {
     // var db = await TransactionDB(dbName: "transaction.db").openDatebase();
     // print(db);

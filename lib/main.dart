@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:learn_flutter_database/models/Transactions.dart';
 import 'package:learn_flutter_database/providers/transaction_provider.dart';
 import 'package:learn_flutter_database/screens/form_screen.dart';
+import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import 'models/Transactions.dart';
 
@@ -41,6 +42,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<TransactionProvider>(context, listen: false).initData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
