@@ -58,26 +58,36 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: Consumer(
           builder: (context, TransactionProvider provider, child) {
-            return ListView.builder(
-              itemCount: provider.transactions.length,
-              itemBuilder: (context, int index) {
-                Transaction data = provider.transactions[index];
-                return Card(
-                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                  elevation: 5,
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 30,
-                      child: FittedBox(
-                        child: Text(data.amount.toString()),
+            var count = provider.transactions.length; //นับจำนวนข้อมูล
+            if (count < 0) {
+              return Center(
+                child: Text(
+                  "ไม่พบข้อมูล",
+                  style: TextStyle(fontSize: 40),
+                ),
+              );
+            } else {
+              return ListView.builder(
+                itemCount: count,
+                itemBuilder: (context, int index) {
+                  Transaction data = provider.transactions[index];
+                  return Card(
+                    margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                    elevation: 5,
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 30,
+                        child: FittedBox(
+                          child: Text(data.amount.toString()),
+                        ),
                       ),
+                      title: Text(data.title),
+                      subtitle: Text(data.date.toString()),
                     ),
-                    title: Text(data.title),
-                    subtitle: Text(data.date.toString()),
-                  ),
-                );
-              },
-            );
+                  );
+                },
+              );
+            }
           },
         ));
   }
